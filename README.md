@@ -1,81 +1,13 @@
-You should use protection!
+# NOTE: This project has been merged upstream to [sinatra/sinatra](https://github.com/sinatra/sinatra)
 
-This gem protects against typical web attacks.
-Should work for all Rack apps, including Rails.
+The tree will be [merged upstream](https://github.com/sinatra/sinatra/tree/master/rack-protection), including commit history.
 
-# Usage
+For specific file history, please refer to the [pre-merge branch](https://github.com/sinatra/rack-protection/tree/pre-merge) here.
 
-Use all protections you probably want to use:
+To use this gem from the upstream repository, you can add the following to your `Gemfile`:
 
-``` ruby
-# config.ru
-require 'rack/protection'
-use Rack::Protection
-run MyApp
+```ruby
+github 'sinatra/sinatra' do
+  gem 'rack-protection'
+end
 ```
-
-Skip a single protection middleware:
-
-``` ruby
-# config.ru
-require 'rack/protection'
-use Rack::Protection, :except => :path_traversal
-run MyApp
-```
-
-Use a single protection middleware:
-
-``` ruby
-# config.ru
-require 'rack/protection'
-use Rack::Protection::AuthenticityToken
-run MyApp
-```
-
-# Prevented Attacks
-
-## Cross Site Request Forgery
-
-Prevented by:
-
-* `Rack::Protection::AuthenticityToken` (not included by `use Rack::Protection`)
-* `Rack::Protection::FormToken` (not included by `use Rack::Protection`)
-* `Rack::Protection::JsonCsrf`
-* `Rack::Protection::RemoteReferrer` (not included by `use Rack::Protection`)
-* `Rack::Protection::RemoteToken`
-
-## Cross Site Scripting
-
-Prevented by:
-
-* `Rack::Protection::EscapedParams`
-* `Rack::Protection::XssHeader` (Internet Explorer only)
-
-## Clickjacking
-
-Prevented by:
-
-* `Rack::Protection::FrameOptions`
-
-## Directory Traversal
-
-Prevented by:
-
-* `Rack::Protection::PathTraversal`
-
-## Session Hijacking
-
-Prevented by:
-
-* `Rack::Protection::SessionHijacking`
-
-## IP Spoofing
-
-
-Prevented by:
-
-* `Rack::Protection::IPSpoofing`
-
-# Installation
-
-    gem install rack-protection
